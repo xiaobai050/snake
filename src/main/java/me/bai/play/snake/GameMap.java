@@ -30,7 +30,7 @@ public class GameMap extends JFrame implements KeyListener {
         gridWidth = Constants.MAP_GRID_WIDTH;
         int desktopOffsetX = Constants.DESKTOP_OFFSET_X;
         int desktopOffsetY = Constants.DESKTOP_OFFSET_Y;
-        Container p = getContentPane();
+        //Container p = getContentPane();
         setBounds(desktopOffsetX, desktopOffsetY, gridWidth * gridNum + offset * 2,
             gridWidth * gridNum + offset * 2);
         setVisible(true);
@@ -80,8 +80,8 @@ public class GameMap extends JFrame implements KeyListener {
     }
 
     private void drawSnake() {
-        SnakeNode forwardNode = snake.getShape().getBody().getLast();
-        fillColor(forwardNode.getX(), forwardNode.getY());
+        SnakeNode newHead = snake.getShape().getBody().getLast();
+        fillColor(newHead.getX(), newHead.getY());
         SnakeNode lastTail = snake.getShape().getLastTail();
         if (lastTail != null) {
             clearColor(lastTail.getX(), lastTail.getY());
@@ -126,10 +126,14 @@ public class GameMap extends JFrame implements KeyListener {
             game.init();
         } else if (keyCode == 33) {
             int currentSpeed = game.getSpeed();
-            game.setSpeed(currentSpeed<<1);
+            int newSpeed = currentSpeed + 1;
+            if(newSpeed>20) {
+                newSpeed=20;
+            }
+            game.setSpeed(newSpeed);
         } else if (keyCode == 34) {
             int currentSpeed = game.getSpeed();
-            int newSpeed = currentSpeed >> 1;
+            int newSpeed = currentSpeed - 1;
             if (newSpeed == 0) {
                 newSpeed = 1;
             }

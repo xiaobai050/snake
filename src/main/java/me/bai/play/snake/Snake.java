@@ -105,5 +105,8 @@ public class Snake {
         return error;
     }
 
+    public void eat(Food food) {
+        shape.getBody().addFirst(shape.getLastTail());
+    }
 }
 

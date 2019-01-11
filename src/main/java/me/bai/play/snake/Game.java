@@ -63,7 +63,7 @@ public class Game implements Runnable {
                     Food food = gameMap.getFood();
                     if (snake.isHeadOnFood(food)) {
                         food.setStatus(Food.FOOD_STATUS_EATEN);
-                        snake.getShape().getBody().addFirst(snake.getShape().getLastTail());
+                        snake.eat(food);
                         food = createFood();
                         gameMap.setFood(food);
                     }
